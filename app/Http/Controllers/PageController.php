@@ -264,4 +264,8 @@ class PageController extends Controller
     	TimeLine::insert(['id_user'=>$id,'infor'=>$infor]);
     	return redirect('Admin/profile/'.$id);
     }
+    public function viewHome(){
+        $data = product::orderBy('id','DESC')->limit(6)->get();
+       return view('users.Home',['data'=>$data]);
+    }
 }

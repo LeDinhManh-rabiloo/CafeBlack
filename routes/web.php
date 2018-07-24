@@ -53,3 +53,4 @@ Route::get('logout',function(){
 	Auth::logout();
 	return redirect('Admin/login');
 });
+Route::get('Home','PageController@viewHome');
