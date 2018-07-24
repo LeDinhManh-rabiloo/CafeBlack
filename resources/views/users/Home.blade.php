@@ -108,31 +108,40 @@
         </a>
     </div> -->
     <div class="gap gap-small"></div>
-    <h1 class="mb20">Popular <small><a href="#">View All</a></small></h1>
+    <h1 class="mb20">Dành riêng cho bạn<small><a href="#">View All</a></small></h1>
     <div class="row row-wrap">
+        @foreach($datax as $dtx)
         <a class="col-md-4" href="#">
             <div class="product-thumb">
                 <header class="product-header">
-                    <img src="{{asset('users/img/our_coffee_miss_u_800x600.jpg')}}" alt="Image Alternative text" title="Our Coffee miss u" />
+                    <img src="{{asset($dtx->image)}}" alt="Image Alternative text" title="Our Coffee miss u" />
                 </header>
                 <div class="product-inner">
-                    <h5 class="product-title">Coffe Shop Discount</h5>
-                    <p class="product-desciption">Hendrerit tempus tellus malesuada mi magnis litora ridiculus</p>
+                    <h5 class="product-title">{{$dtx->name}}</h5>
+                    <p class="product-desciption">{{$dtx->category->name}}</p>
                     <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i>  6 h remaining</span>
                         <ul class="product-price-list">
-                            <li><span class="product-price">$48</span>
+                            @if($dtx->sale !='')
+                            <li>
+                                <span class="product-price">
+                                    {{ number_format($dtx->price - ($dtx->price*($dtx->sale->percent)/100)) }}vnđ
+                                </span>
                             </li>
-                            <li><span class="product-old-price">$119</span>
+                            <li><span class="product-old-price">{{ number_format($dtx->price) }}vnđ</span>
                             </li>
-                            <li><span class="product-save">Save 40%</span>
+                            <li><span class="product-save">Sale {{$dtx->sale->percent}}%</span>
                             </li>
+                            @else
+                            <li><span class="product-price">{{number_format($dtx->price)}}</span><!-- number_format(): dùng để format kiểu number -->
+                            </li>
+                            @endif
                         </ul>
                     </div>
                     <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
                 </div>
             </div>
         </a>
-        
+        @endforeach
     </div>
     <div class="gap"></div>
 </div>

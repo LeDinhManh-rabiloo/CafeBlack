@@ -361,6 +361,12 @@
             <span>Danh sách users</span>
           </a>
         </li>
+         <li>
+          <a href="{{url('Admin/sale')}}" >
+            <i class = "ion ion-person"></i>
+            <span>Sale</span>
+          </a>
+        </li>
         <li>
           <a href="{{url('Admin/list_order')}}" >
             <i class = "fa fa-address-book-o"></i>
@@ -417,7 +423,7 @@
           <ul class="treeview-menu">
             <li><a href="{{url('Admin/insertcategory')}}"><i class="fa fa-circle-o"></i>Thêm danh mục</a></li>
             <li><a href="{{url('Admin/insert')}}"><i class="fa fa-circle-o"></i>Thêm sản phẩm</a></li>
-            <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
+            <li><a href="{{url('Admin/add_slide')}}"><i class="fa fa-circle-o"></i>Thêm slide</a></li>
             <li><a href="pages/forms/form-validation.html"><i class="fa fa-circle-o"></i> Form Validation</a></li>
             <li><a href="pages/forms/form-wizard.html"><i class="fa fa-circle-o"></i> Form Wizard</a></li>
             <li><a href="pages/forms/code-editor.html"><i class="fa fa-circle-o"></i> Code Editor</a></li>
@@ -434,7 +440,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{url('Admin/listcategory')}}"><i class="fa fa-circle-o"></i>Danh mục</a></li>
-            <li><a href="{{url('Admin/list')}}"><i class="fa fa-circle-o"></i> Danh sách sản phẩm</a></li>
+            <li><a href="{{url('Admin/list')}}"><i class="fa fa-circle-o"></i> Danh sách sản phẩm</a></li><li><a href="{{url('Admin/list_slide')}}"><i class="fa fa-circle-o"></i> Danh sách Slide</a></li>
           </ul>
         </li>
         <li>

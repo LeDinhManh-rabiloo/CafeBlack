@@ -39,6 +39,11 @@ Route::group(array("prefix"=>"Admin", "middleware"=>"adminLogin"),function(){
 	Route::get('cartEdit/{id}','PageController@Upstatuscart');
 	Route::post('cartEdit/{id}','PageController@PostUpstatuscart');
 	Route::get('list_order','PageController@ListOrder');
+	Route::get('list_slide','PageController@listSlide');
+	Route::get('list_slide/delete/{id}','PageController@DeleteSlide');
+	Route::get('add_slide','PageController@getAddSlide');
+	Route::post('add_slide','PageController@AddSlide');
+	Route::get('sale','PageController@listSale');
 });
 Route::get("Admin",function(){
 	//kiểm tra nếu user đã đăng nhập thì di chuyển đến các trang trong admin nếu không thì yêu cầu đăng nhập

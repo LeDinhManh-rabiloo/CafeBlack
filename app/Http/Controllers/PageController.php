@@ -13,6 +13,7 @@ use App\TimeLine;
 use App\Customer;
 use App\orders;
 use App\status;
+use App\slide;
 
 class PageController extends Controller
 {
@@ -264,8 +265,50 @@ class PageController extends Controller
     	TimeLine::insert(['id_user'=>$id,'infor'=>$infor]);
     	return redirect('Admin/profile/'.$id);
     }
+    public function listSlide()
+    {
+        $slide = slide::paginate(6);
+        return view('slide',['slide'=>$slide]);
+    }
+    public function DeleteSlide($id)
+    {
+        slide::where('id',$id)->delete();
+        return redirect('Admin/list_slide');
+    }
+    public function getAddSlide()
+    {
+        return view('addslide');
+    }
+    public function AddSlide(Request $req)
+    {
+        $slide = new slide();
+        if ($req->image) {
+            $file = $req->file('image');
+            $duoi= $file->getClientOriginalExtension();
+            if($duoi!='jpg' && $duoi!='png' && $duoi!='jpeg')
+                {
+                    return redirect(url('insert'))->with("Lỗi", "Bạn chỉ có thể đưa vào file có đuôi jpg, png hoặc jpeg");
+                }
+            $nameimage = $file->getClientOriginalName();
+            $image1 = str_random(5)."_".$nameimage;
+            while (file_exists("users/img/".$image1)) {
+                $image1 = str_random(5)."_".$nameimage;
+            }
+            $file->move("users/img/",$image1);
+            $slide->image = "users/img/".$image1;
+        }
+        else
+        {
+            $product->image = "";
+        }
+        $slide->save();
+        return redirect(url('Admin/list_slide'));
+    }
     public function viewHome(){
         $data = product::orderBy('id','DESC')->limit(6)->get();
-       return view('users.Home',['data'=>$data]);
+        $slide = slide::all();
+        $datax = product::all()->load('sale');
+       return view('users.Home',['data'=>$data,'slide'=>$slide,'datax'=>$datax]);
     }
+    
 }

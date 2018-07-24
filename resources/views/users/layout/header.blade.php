@@ -187,7 +187,7 @@
               <!-- Menu Footer-->
                     <li class="user-footer">
                         <div>
-                        <a href="{{url('Admin/profile/'.Auth::user()->id)}}" class="btn btn-block btn-primary">Profile</a>
+                        <a href="{{url('profile/'.Auth::user()->id)}}" class="btn btn-block btn-primary">Profile</a>
                         </div>
                         <div>
                         <a href="{{url('logout')}}" class="btn btn-block btn-danger">Sign out</a>
@@ -211,33 +211,17 @@
 <!--        Start slide         -->
 <div class="top-area">
     <div class="owl-carousel owl-slider" id="owl-carousel-slider" data-inner-pagination="true" data-white-pagination="true">
+        @foreach($slide as $sl)
         <div>
             <div class="bg-holder">
-                <img src="{{asset('users/img/bridge_1200x480.jpg')}}" alt="Image Alternative text" title="Bridge" />
+                <img src="{{asset($sl->image)}}" alt="Image Alternative text" title="Bridge" />
                 <!-- <div class="vert-center text-white text-center slider-caption">
                     <h2 class="text-uc">London Weekends</h2>
                     <div class="countdown countdown-big" data-countdown="Jul 7, 2014 5:30:00"></div><a class="btn btn-lg btn-ghost btn-white" href="#">Save 80% Now</a>
                 </div> -->
             </div>
         </div>
-        <div>
-            <div class="bg-holder">
-                <img src="{{asset('users/img/4_strokes_of_fun_1200x480.jpg')}}" alt="Image Alternative text" title="4 Strokes of Fun" />
-                <!-- <div class="vert-center text-white text-center slider-caption">
-                    <h2 class="text-uc">Adrenaline Madness</h2>
-                    <div class="countdown countdown-big" data-countdown="Jul 24, 2014 5:30:00"></div><a class="btn btn-lg btn-ghost btn-white" href="#">Save 50% Now</a>
-                </div> -->
-            </div>
-        </div>
-        <div>
-            <div class="bg-holder">
-                <img src="{{asset('users/img/lhotel_porto_bay_sao_paulo_luxury_suite_1200x480.jpg')}}" alt="Image Alternative text" title="LHOTEL PORTO BAY SAO PAULO luxury suite" />
-                <!-- <div class="vert-center text-white text-center slider-caption">
-                    <h2 class="text-uc">Premium Apartments</h2>
-                    <div class="countdown countdown-big" data-countdown="Jul 14, 2014 5:30:00"></div><a class="btn btn-lg btn-ghost btn-white" href="#">Save 70% Now</a>
-                </div> -->
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>
 <!--        End slide           -->
