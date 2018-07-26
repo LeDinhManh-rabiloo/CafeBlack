@@ -18,7 +18,7 @@
 						<th>STT</th>
 						<th>Name</th>
 						<th>created</th>
-						<th style="width: 200px;">Action</th>
+						<th style="width: 200px;">Tác vụ</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -31,6 +31,7 @@
 						<td>{{$key->created_at}}</td>
 						<td>
 							<a href="{{url('Admin/listcategory/Edit/'.$key->id)}}" class="btn btn-success">Edit</a>
+							<a href="{{url('Admin/salecategory/'.$key->id)}}" class="btn btn-danger" style="margin-left: 3px;">Sale</a>
 							<a href="{{url('Admin/listcategory/delete/'.$key->id)}}"class="btn btn-danger" onclick="return window.confirm('bạn có muốn xóa?');">Delete</a>
 						</td>
 					</tr>

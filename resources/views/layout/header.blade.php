@@ -361,12 +361,12 @@
             <span>Danh sách users</span>
           </a>
         </li>
-         <li>
+        <!--  <li>
           <a href="{{url('Admin/sale')}}" >
             <i class = "ion ion-person"></i>
             <span>Sale</span>
           </a>
-        </li>
+        </li> -->
         <li>
           <a href="{{url('Admin/list_order')}}" >
             <i class = "fa fa-address-book-o"></i>
@@ -411,6 +411,20 @@
             <li><a href="pages/UI/tab.html"><i class="fa fa-circle-o"></i> Tab</a></li>
             <li><a href="pages/UI/notification.html"><i class="fa fa-circle-o"></i> Notification</a></li>
             <li><a href="pages/UI/sweatalert.html"><i class="fa fa-circle-o"></i> Sweatalert</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+           <i class="fa fa-money" aria-hidden="true"></i>
+            <span>Sale</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{url('Admin/list_sale')}}"><i class="fa fa-circle-o"></i>List Sale</a></li>
+            <li><a href="{{url('Admin/Add_sale')}}"><i class="fa fa-circle-o"></i>Add Sale</a></li>
+            <li><a href="{{url('Admin/listcategory')}}"><i class="fa fa-circle-o"></i>Sale theo loại sản phẩm</a></li>
           </ul>
         </li>
         <li class="treeview">

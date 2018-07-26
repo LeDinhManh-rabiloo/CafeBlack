@@ -209,21 +209,7 @@
 
 
 <!--        Start slide         -->
-<div class="top-area">
-    <div class="owl-carousel owl-slider" id="owl-carousel-slider" data-inner-pagination="true" data-white-pagination="true">
-        @foreach($slide as $sl)
-        <div>
-            <div class="bg-holder">
-                <img src="{{asset($sl->image)}}" alt="Image Alternative text" title="Bridge" />
-                <!-- <div class="vert-center text-white text-center slider-caption">
-                    <h2 class="text-uc">London Weekends</h2>
-                    <div class="countdown countdown-big" data-countdown="Jul 7, 2014 5:30:00"></div><a class="btn btn-lg btn-ghost btn-white" href="#">Save 80% Now</a>
-                </div> -->
-            </div>
-        </div>
-        @endforeach
-    </div>
-</div>
+@include('users.layout.slide')
 <!--        End slide           -->
 
 <form class="search-area form-group search-area-dark">

@@ -59,24 +59,35 @@
     </div>
     <div class="gap gap-small"></div>
     <h1 class="mb20">Sản phẩm mới <small><a href="#">View All</a></small></h1>
-   
     <div class="row row-wrap">
      @foreach($data as $dt)
         <a class="col-md-4" href="#">
             <div class="product-thumb">
                 <header class="product-header">
-                    <img src="{{asset($dt->image)}}" alt="Image Alternative text" title="waipio valley" />
+                    <img src="{{asset($dt->image)}}" alt="Image Alternative text" title="Our Coffee miss u" />
                 </header>
                 <div class="product-inner">
                     <h5 class="product-title">{{$dt->name}}</h5>
                     <p class="product-desciption">{{$dt->category->name}}</p>
-                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i> 1 day 14 h remaining</span>
+                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i>  6 h remaining</span>
                         <ul class="product-price-list">
-                            <li><span class="product-price">{{$dt->price}}</span>
+                            @if($dt->sale !='')
+                            <li>
+                                <span class="product-price" style="font-size: 10px;">
+                                    {{ number_format($dt->price - ($dt->price*($dt->sale->percent)/100)) }}vnđ
+                                </span>
                             </li>
+                            <li><span class="product-old-price" style="height: 30px; font-size: 10px;">{{ number_format($dt->price) }}vnđ</span>
+                            </li>
+                            <li><span class="product-save" style="font-size: 10px;">Sale {{$dt->sale->percent}}%</span>
+                            </li>
+                            @else
+                            <li><span class="product-price">{{number_format($dt->price)}}</span><!-- number_format(): dùng để format kiểu number -->
+                            </li>
+                            @endif
                         </ul>
                     </div>
-                    <p class="product-location"><i class="fa fa-map-marker"></i> {{$dt->origin}}</p>
+                    <p class="product-location"><i class="fa fa-map-marker"></i>{{$dt->origin}}</p>
                 </div>
             </div>
         </a>
@@ -137,7 +148,7 @@
                             @endif
                         </ul>
                     </div>
-                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
+                    <p class="product-location"><i class="fa fa-map-marker"></i>{{$dtx->origin}}</p>
                 </div>
             </div>
         </a>

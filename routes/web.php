@@ -43,7 +43,13 @@ Route::group(array("prefix"=>"Admin", "middleware"=>"adminLogin"),function(){
 	Route::get('list_slide/delete/{id}','PageController@DeleteSlide');
 	Route::get('add_slide','PageController@getAddSlide');
 	Route::post('add_slide','PageController@AddSlide');
-	Route::get('sale','PageController@listSale');
+	Route::get('list_sale','PageController@listSale');
+	Route::get('Add_sale','PageController@getAddSale');
+	Route::post('Add_sale','PageController@postAddSale');
+	Route::get('sale/{id}','PageController@getSaleProduct');
+	Route::post('sale/{id}','PageController@postSaleProduct');
+	Route::get('salecategory/{id}','PageController@getSaleCategory');
+	Route::post('salecategory/{id}','PageController@postSalecategory');
 });
 Route::get("Admin",function(){
 	//kiểm tra nếu user đã đăng nhập thì di chuyển đến các trang trong admin nếu không thì yêu cầu đăng nhập
@@ -59,3 +65,6 @@ Route::get('logout',function(){
 	return redirect('Admin/login');
 });
 Route::get('Home','PageController@viewHome');
+Route::get('cart',function(){
+	return view('users.shoppingcart');
+});

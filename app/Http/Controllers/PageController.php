@@ -14,6 +14,8 @@ use App\Customer;
 use App\orders;
 use App\status;
 use App\slide;
+use App\sale;
+use Cart;
 
 class PageController extends Controller
 {
@@ -168,8 +170,8 @@ class PageController extends Controller
     public function Viewlist()
     {
 
-    	$data['arr'] = product::paginate(6);
-    	return view('list',$data);
+    	$data = product::paginate(6);
+    	return view('list',['data'=>$data]);
     }
     public function delete($id)
     {
@@ -310,5 +312,47 @@ class PageController extends Controller
         $datax = product::all()->load('sale');
        return view('users.Home',['data'=>$data,'slide'=>$slide,'datax'=>$datax]);
     }
-    
+    public function listSale(){
+        $data = sale::paginate(10);
+        return view('listsale',['data'=>$data]);
+    }
+    public function deleteSale($id){
+        sale::where('id',$id)->delete();
+        return redirect(url('Admin/list_sale'));
+    }
+    public function getAddSale()
+    {
+        return view('add_sale');
+    }
+    public function postAddSale(Request $req)
+    {
+        $sale = new sale();
+        $sale->percent = $req->percent;
+        $sale->save();
+        return redirect(url('Admin/list_sale'));
+    }
+    public function getSaleProduct($id)
+    {
+        $sale = sale::orderBy('percent')->get();
+        $data = product::where('id',$id)->get();
+        return view('saleproduct',['data'=>$data,'sale'=>$sale]);
+    }
+    public function postSaleProduct(Request $req,$id)
+    {
+        $percent = $req->sale;
+        product::where('id',$id)->update(['id_sale'=>$percent]);
+        return redirect(url('Admin/list'));
+    }
+    public function getSaleCategory($id)
+    {
+        $category = category::where('id',$id)->get();
+        $sale = sale::orderBy('percent')->get();
+        return view('salecategory',['category'=>$category,'sale'=>$sale]);
+    }
+    public function postSalecategory(Request $req,$id)
+    {
+        $id_sale = $req->sale;
+        product::where('id_category',$id)->update(['id_sale'=>$id_sale]);
+        return redirect(url('Admin/list'));
+    }
 }

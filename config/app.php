@@ -151,6 +151,7 @@ return [
          * Package Service Providers...
          */
         GoogleMaps\ServiceProvider\GoogleMapsServiceProvider::class,
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -209,6 +210,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'GoogleMaps' => GoogleMaps\Facade\GoogleMapsFacade::class,
+        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
     ],
 
 ];
