@@ -11,7 +11,7 @@
     <meta name="author" content="">
     <link rel="icon" href="{{asset('images/favicon.ico')}}">
 
-    <title>Fox Admin - Log in </title>
+    <title>Admin - Log in </title>
   
 	<!-- Bootstrap 4.0-->
 	<link rel="stylesheet" href="{{asset('assets/vendor_components/bootstrap/dist/css/bootstrap.min.css')}}">
@@ -43,7 +43,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index-2.html"><b>Fox</b>Admin</a>
+    <a href=""><b>Admin </b>Login</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -93,7 +93,7 @@
     <!-- /.social-auth-links -->
 
     <div class="margin-top-30 text-center">
-    	<p>Bạn chưa có tài khoản <a href="{{url('register')}}" class="text-info m-l-5">Đăng ký</a></p>
+    	<p>Bạn chưa có tài khoản <a href="{{url('Admin/register')}}" class="text-info m-l-5">Đăng ký</a></p>
     </div>
        <div class="col-12" style="margin-left: 35px">
          <div class="fog-pwd">

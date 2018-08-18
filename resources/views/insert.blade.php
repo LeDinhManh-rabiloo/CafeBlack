@@ -43,6 +43,13 @@
               </select>
             </div>
           </div>
+          <div class="form-group">
+            <h5>Thông tin sản phẩm <span class="text-danger">*</span></h5>
+            <textarea name="content" class="form-control"></textarea>
+            <script>
+              CKEDITOR.replace('content');
+            </script>
+          </div>
           <div class="text-xs-right">
             <button type="submit" class="btn btn-info">Submit</button>
           </div>

@@ -11,4 +11,8 @@ class category extends Model
     {
     	return $this->hasMany('App\product','id_category','id');
     }
+    public function fontsicons()
+    {
+    	return $this->belongsTo('App\fontsicons','id_icons','id');
+    }
 }

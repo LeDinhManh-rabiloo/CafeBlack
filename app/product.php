@@ -19,4 +19,8 @@ class product extends Model
     {
     	return $this->belongsTo('App\sale','id_sale','id');
     }
+    public function review()
+    {
+        return $this->hasMany('App\review','id_product','id');
+    }
 }

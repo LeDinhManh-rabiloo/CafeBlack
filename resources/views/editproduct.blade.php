@@ -36,8 +36,13 @@
           <div class="form-group">
             <h5>Ảnh sản phẩm <span class="text-danger">*</span></h5>
             <div class="controls">
-              <input type="file" name="image" class="form-control" required> 
+              <input type="file" name="image" class="form-control" required multiple> 
             </div>
+          </div>
+          <div class="form-group">
+            <h5>Ảnh minh họa <span class="text-danger">*</span></h5>
+            <div class="controls">
+              <input type="file" name="image2[]" class="form-control" required> </div>
           </div>
           <div class="form-group">
             <h5>Loại sản phẩm <span class="text-danger">*</span></h5>

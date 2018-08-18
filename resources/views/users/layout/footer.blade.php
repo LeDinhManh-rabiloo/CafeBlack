@@ -18,27 +18,24 @@
                             <a class="fa fa-twitter box-icon" href="#" data-toggle="tooltip" title="Twitter"></a>
                         </li>
                         <li>
-                            <a class="fa fa-flickr box-icon" href="#" data-toggle="tooltip" title="Flickr"></a>
-                        </li>
-                        <li>
                             <a class="fa fa-linkedin box-icon" href="#" data-toggle="tooltip" title="LinkedIn"></a>
                         </li>
                         <li>
                             <a class="fa fa-tumblr box-icon" href="#" data-toggle="tooltip" title="Tumblr"></a>
                         </li>
                     </ul>
-                    <p>Elementum sit lacus ultrices sollicitudin quisque natoque laoreet integer id nibh consectetur nullam ad vel ante pulvinar metus nullam sociis</p>
+                    <p>Bạn có thể tương tác và phản hồi vơi chúng tôi tại đây</p>
                 </div>
                 <div class="col-md-3">
-                    <h4>Sign Up to the Newsletter</h4>
+                    <h4>Đăng ký nhận tin khuyến mãi</h4>
                     <div class="box">
                         <form>
                             <div class="form-group mb10">
                                 <label>E-mail</label>
-                                <input type="text" class="form-control" />
+                                <input type="email" class="form-control" />
                             </div>
-                            <p class="mb10">Dignissim ante diam sociosqu neque imperdiet natoque</p>
-                            <input type="submit" class="btn btn-primary" value="Sign Up" />
+                            <p class="mb10">Khi đăng ký bạn sẽ nhận được một mã giảm giá và cập nhật các chương trình khuyến mãi</p>
+                            <input type="submit" class="btn btn-primary" value="Đăng ký" />
                         </form>
                     </div>
                 </div>

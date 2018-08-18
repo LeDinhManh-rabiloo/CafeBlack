@@ -16,8 +16,8 @@ Route::get('/', function () {
 });
 Route::get('Admin/login','PageController@Login');
 Route::post('Admin/login','PageController@postLogin');
-Route::get('register','PageController@Register');
-Route::post('register','PageController@postRegister');
+Route::get('Admin/register','PageController@Register');
+Route::post('Admin/register','PageController@postRegister');
 Route::group(array("prefix"=>"Admin", "middleware"=>"adminLogin"),function(){
 	Route::get('Home', 'PageController@Home');
 	Route::get('list_users','PageController@ListUser');
@@ -50,13 +50,18 @@ Route::group(array("prefix"=>"Admin", "middleware"=>"adminLogin"),function(){
 	Route::post('sale/{id}','PageController@postSaleProduct');
 	Route::get('salecategory/{id}','PageController@getSaleCategory');
 	Route::post('salecategory/{id}','PageController@postSalecategory');
+	Route::get('Statistical/day','PageController@FormStatisticalDay');
+	Route::get('Statistical/dayn','PageController@StatisticalDay');
+	Route::get('Statistical/month','PageController@FormStatisticalMonth');
+	Route::get('Statistical/monthn','PageController@StatisticalMonth');
 });
 Route::get("Admin",function(){
 	//kiểm tra nếu user đã đăng nhập thì di chuyển đến các trang trong admin nếu không thì yêu cầu đăng nhập
-	if (Auth::check()==true) {
+	if (Auth::check()==true && Auth::user()->status ==1) {
 		return redirect(url('Admin/Home'));
 	}
 	else{
+		Auth::logout();
 		return redirect('Admin/login');
 	}
 });
@@ -65,6 +70,23 @@ Route::get('logout',function(){
 	return redirect('Admin/login');
 });
 Route::get('Home','PageController@viewHome');
-Route::get('cart',function(){
-	return view('users.shoppingcart');
+Route::get('shopping{id}{id_user}','PageController@getShopping');
+Route::get('cart','PageController@ShopCart');
+Route::get('shop/delete/{id}','PageController@DeleteCart');
+Route::get('login','PageController@UsersLogin');
+Route::post('login','PageController@postUserLogin');
+Route::get('register','PageController@UsersRegister');
+Route::post('register','PageController@UserspostRegister');
+Route::get('userlogout',function(){
+	Auth::logout();
+	return redirect('Home');
 });
+Route::get('san-pham/{name}{id}','PageController@ProductofCate');
+Route::get('Update/{id}/{qty}','PageController@Update');
+Route::get('Pay','PageController@Pay');
+Route::post('Pay/{id}','PageController@postPay');
+Route::get('don-hang/{id}','PageController@donhang');
+Route::get('huy-don/{id}{id_user}','PageController@huydon');
+Route::get('infoproduct/{id}','PageController@infoProduct');
+Route::post('infoproduct/{id}','PageController@postreviews');
+Route::get('seach','PageController@getSearch');

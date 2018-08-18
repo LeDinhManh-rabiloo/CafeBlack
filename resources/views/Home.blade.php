@@ -106,11 +106,13 @@
 		<div class="box-body no-padding">
 		  <ul class="users-list clearfix">
 		  	@foreach($arr as $key)
+		  	@if($key->status == 1)
 			<li>
 			  <img src="{{asset($key->image)}}" alt="User Image">
 			  <a class="users-list-name" href="#">{{$key->name}}</a>
 			  <span class="users-list-date">{{$key->created_at}}</span>
 			</li>
+			@endif
 			@endforeach
 		  </ul>
 		  <!-- /.users-list -->
@@ -148,6 +150,7 @@
               	<th>STT</th>
                 <th>Mã đơn</th>
                 <th>Người mua</th>
+                <th>Người nhận</th>
                 <th>sản phẩm</th>
                 <th>Trạng thái</th>
                 <th>Đơn giá</th>
@@ -160,14 +163,15 @@
               	@foreach($orders as $key2)
               	<?php $stt++ ?>
               <tr>
-                <td>{{$stt++}}</td>
-                <td>{{$key2->code_orders}}</td>
-                <td>{{$key2->customer->name}}</td>
+                <td>{{$stt}}</td>
+                <td>{{$key2->code_order}}</td>
+                <td>{{$key2->users->name}}</td>
+                <th>{{$key2->nguoinhan}}</th>
                 <td><span>{{$key2->product->name}}</span></td>
                 <td>
-                  <div class="label bg-purple" data-color="#7460ee" data-height="20" style="font-weight: bold;">{{$key2->status->name}}</div>
+                  <div class="label bg-purple" data-color="#7460ee" data-height="20" style="font-weight: bold;">{{$key2->status->status}}</div>
                 </td>
-                <td>{{$key2->product->price}}</td>
+                <td>{{number_format($key2->product->price)}}</td>
                 <td>{{$key2->created_at}}</td>
                 <td>
                 	<a href="{{url('Admin/cartEdit/'.$key2->id)}}" class="btn btn-success">Edit</a>

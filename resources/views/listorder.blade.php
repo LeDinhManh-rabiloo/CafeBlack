@@ -28,17 +28,20 @@
 					<?php $stt++ ?>
 					<tr>
 						<td>{{$stt}}</td>
-						<td>{{$key->customer->name}}</td>
+						<td>{{$key->nguoinhan}}</td>
 						<td >{{$key->product->name}}</td>
-						<td>{{$key->customer->phone}}</td>
-						<td>{{$key->customer->address}}</td>
-						<td><span class="label bg-purple">{{$key->status->name}}</span></td>
+						<td>{{$key->Phone}}</td>
+						<td>{{$key->Address}}</td>
+						<td><span class="label bg-purple">{{$key->status->status}}</span></td>
 						<td>
                 			<a href="{{url('Admin/cartEdit/'.$key->id)}}" class="btn btn-success">Edit Status</a>
                 		</td>
 					</tr>
 					@endforeach
 				</tbody>
+				<div style="float:right;width: 200px;height: 50px;">
+					<p style="font-weight: bold;">Tổng đơn: {{$td}}</p>
+				</div>
 				<div class='list-page'>
 					{{$orders->links()}}
 				</div>

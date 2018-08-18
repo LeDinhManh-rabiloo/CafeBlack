@@ -15,8 +15,9 @@
 					<tr>
 						<th>STT</th>
 						<th>Name</th>
-						<th style="width: 500px;">Image</th>
+						<th style="width: 300px;">Image</th>
 						<th>email</th>
+						<th>Tài khoản</th>
 						<th>created</th>
 					</tr>
 				</thead>
@@ -28,9 +29,14 @@
 						<td>{{$stt}}</td>
 						<td>{{$key->name}}</td>
 						<td >
-							<img src="{{asset($key->image)}}" style="width: 100%;height: 300px;">
+							<img src="{{asset($key->image)}}" style="width: 100%;height: 200px;">
 						</td>
 						<td>{{$key->email}}</td>
+						@if($key->status == 1)
+						<td>Admin</td>
+						@else
+						<td>Khách hàng</td>
+						@endif
 						<td>{{$key->created_at}}</td>
 					</tr>
 					@endforeach

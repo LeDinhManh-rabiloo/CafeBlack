@@ -4,156 +4,381 @@
     <div class="row">
         <div class="col-md-3">
             <aside class="sidebar-left">
-                <h3 class="mb20">I am Looking For</h3>
+                <h3 class="mb20">Danh mục sản phẩm</h3>
                 <ul class="nav nav-tabs nav-stacked nav-coupon-category nav-coupon-category-left">
-                    <li><a href="#"><i class="fa fa-cutlery"></i>Food & Drink<span>47</span></a>
+                    @foreach($category as $cate)
+                    <li><a href="{{url('san-pham/'.$cate->name.$cate->id)}}"><i class="{{$cate->fontsicons->code}}"></i>{{$cate->name}}<span style="font-size: 12px;">
+                        <?php $dem =0; ?>
+                        @foreach($product as $pro)
+                        @if($pro->id_category == $cate->id)
+                        <?php $dem++ ?>
+                        @endif
+                        @endforeach
+                        {{$dem}}
+                    </span></a>
                     </li>
-                    <li><a href="#"><i class="fa fa-calendar"></i>Events<span>37</span></a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-female"></i>Beauty<span>48</span></a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-bolt"></i>Fitness<span>35</span></a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-headphones"></i>Electronics<span>40</span></a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-image"></i>Furniture<span>48</span></a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-umbrella"></i>Fashion<span>43</span></a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-shopping-cart"></i>Shopping<span>32</span></a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-home"></i>Home & Graden<span>49</span></a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-plane"></i>Travel<span>44</span></a>
-                    </li>
+                    @endforeach
                 </ul>
             </aside>
         </div>
         <div class="col-md-9">
-            <h1 class="mb20">Weekly Featured <small><a href="#">View All</a></small></h1>
+            <h1 class="mb20">Weekly Featured </h1>
             <div class="row row-wrap">
-                <a class="col-md-4" href="#">
-                    <div class="product-thumb">
-                        <header class="product-header">
-                            <img src="{{asset('users/img/amaze_800x600.jpg')}}" alt="Image Alternative text" title="AMaze" />
-                        </header>
-                        <div class="product-inner">
-                            <h5 class="product-title">New Glass Collection</h5>
-                            <p class="product-desciption">Consequat nullam potenti ac sagittis iaculis justo sociis</p>
-                            <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i> 4 days 49 h remaining</span>
-                                <ul class="product-price-list">
-                                    <li><span class="product-price">$126</span>
-                                    </li>
-                                    <li><span class="product-old-price">$268</span>
-                                    </li>
-                                    <li><span class="product-save">Save 47%</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
-                        </div>
+    <?php $countP = 0 ?>
+     @foreach($datan as $dtn)
+     @if(Auth::check())
+     <input type="hidden" name="" id="pr_id<?php echo $countP;?>" value="{{$dtn->id}}">
+     <input type="hidden" name="" id="userId" value="{{Auth::user()->id}}">
+        <div class="col-md-4">
+            <div class="product-thumb">
+                <header class="product-header" style="height: 200px;">
+                    <img src="{{asset($dtn->image)}}" alt="Image Alternative text" title="Green Furniture" style="height: 100%" />
+                </header>
+                <div class="product-inner">
+                    <ul class="icon-group icon-list-rating" title="3.7/5 rating">
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star-o"></i>
+                        </li>
+                    </ul>
+                    <h5 class="product-title">{{$dtn->name}}</h5>
+                    <p class="product-desciption">{{$dtn->origin}}</p>
+                    <div class="product-meta">
+                        <ul class="product-price-list">
+                            @if($dtn->sale !='')
+                            <li>
+                                <span class="product-price" style="font-size: 10px;">
+                                    {{ number_format($dtn->price - ($dtn->price*($dtn->sale->percent)/100)) }}VNĐ
+                                </span>
+                            </li>
+                            <li><span class="product-old-price" style="height: 30px; font-size: 10px;">{{ number_format($dtn->price) }}VNĐ</span>
+                            </li>
+                            <li><span class="product-save" style="font-size: 10px;">Sale {{$dtn->sale->percent}}%</span>
+                            </li>
+                            @else
+                            <li><span class="product-price">{{number_format($dtn->price)}}VNĐ</span><!-- number_format(): dùng để format kiểu number -->
+                            </li>
+                            @endif
+                        </ul>
+                        <ul class="product-actions-list">
+                            <li><button class="btn btn-sm to-cart" id="AddCart<?php echo $countP++?>"><i class="fa fa-shopping-cart"></i> To Cart</button>
+                            </li>
+                            <li><a class="btn btn-sm" href="{{url('infoproduct/'.$dtn->id)}}"><i class="fa fa-bars"></i> Details</a>
+                            </li>
+                        </ul>
                     </div>
-                </a>
+                </div>
             </div>
+        </div>
+        @else
+        <div class="col-md-3">
+            <div class="product-thumb">
+                <header class="product-header" style="height: 200px">
+                    <img src="{{asset($dtn->image)}}" alt="Image Alternative text" title="Green Furniture"style="height: 100%" />
+                </header>
+                <div class="product-inner">
+                    <ul class="icon-group icon-list-rating" title="3.7/5 rating">
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star-o"></i>
+                        </li>
+                    </ul>
+                    <h5 class="product-title">{{$dtn->name}}</h5>
+                    <p class="product-desciption">{{$dtn->origin}}</p>
+                    <div class="product-meta">
+                        <ul class="product-price-list">
+                            @if($dtn->sale !='')
+                            <li>
+                                <span class="product-price" style="font-size: 10px;">
+                                    {{ number_format($dtn->price - ($dtn->price*($dtn->sale->percent)/100)) }}VNĐ
+                                </span>
+                            </li>
+                            <li><span class="product-old-price" style="height: 30px; font-size: 10px;">{{ number_format($dtn->price) }}VNĐ</span>
+                            </li>
+                            <li><span class="product-save" style="font-size: 10px;">Sale {{$dtn->sale->percent}}%</span>
+                            </li>
+                            @else
+                            <li><span class="product-price">{{number_format($dtn->price)}}VNĐ</span><!-- number_format(): dùng để format kiểu number -->
+                            </li>
+                            @endif
+                        </ul>
+                        <ul class="product-actions-list">
+                            <li><a class="btn btn-sm" href="{{url('login')}}"><i class="fa fa-shopping-cart"></i> To Cart</a>
+                            </li>
+                            <li><a class="btn btn-sm" href="{{url('infoproduct/'.$dtn->id)}}"><i class="fa fa-bars"></i> Details</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+        <?php $countP+1 ?>
+        @endforeach
+    </div>
         </div>
     </div>
     <div class="gap gap-small"></div>
     <h1 class="mb20">Sản phẩm mới <small><a href="#">View All</a></small></h1>
     <div class="row row-wrap">
+    <?php $countmax = 0 ?>
      @foreach($data as $dt)
-        <a class="col-md-4" href="#">
+     @if(Auth::check())
+     <input type="hidden" name="" id="pro_id<?php echo $countmax;?>" value="{{$dt->id}}">
+     <input type="hidden" name="" id="user_id" value="{{Auth::user()->id}}">
+        <div class="col-md-3">
             <div class="product-thumb">
-                <header class="product-header">
-                    <img src="{{asset($dt->image)}}" alt="Image Alternative text" title="Our Coffee miss u" />
+                <header class="product-header" style="height: 200px;">
+                    <img src="{{asset($dt->image)}}" alt="Image Alternative text" title="Green Furniture" style="height: 100%" />
                 </header>
                 <div class="product-inner">
+                    <ul class="icon-group icon-list-rating" title="3.7/5 rating">
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star-o"></i>
+                        </li>
+                    </ul>
                     <h5 class="product-title">{{$dt->name}}</h5>
-                    <p class="product-desciption">{{$dt->category->name}}</p>
-                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i>  6 h remaining</span>
+                    <p class="product-desciption">{{$dt->origin}}</p>
+                    <div class="product-meta">
                         <ul class="product-price-list">
                             @if($dt->sale !='')
                             <li>
                                 <span class="product-price" style="font-size: 10px;">
-                                    {{ number_format($dt->price - ($dt->price*($dt->sale->percent)/100)) }}vnđ
+                                    {{ number_format($dt->price - ($dt->price*($dt->sale->percent)/100)) }}VNĐ
                                 </span>
                             </li>
-                            <li><span class="product-old-price" style="height: 30px; font-size: 10px;">{{ number_format($dt->price) }}vnđ</span>
+                            <li><span class="product-old-price" style="height: 30px; font-size: 10px;">{{ number_format($dt->price) }}VNĐ</span>
                             </li>
                             <li><span class="product-save" style="font-size: 10px;">Sale {{$dt->sale->percent}}%</span>
                             </li>
                             @else
-                            <li><span class="product-price">{{number_format($dt->price)}}</span><!-- number_format(): dùng để format kiểu number -->
+                            <li><span class="product-price">{{number_format($dt->price)}}VNĐ</span><!-- number_format(): dùng để format kiểu number -->
                             </li>
                             @endif
                         </ul>
-                    </div>
-                    <p class="product-location"><i class="fa fa-map-marker"></i>{{$dt->origin}}</p>
-                </div>
-            </div>
-        </a>
-        @endforeach
-    </div>
-    
-    <!-- <div class="row row-wrap">
-        <a class="col-md-3" href="#">
-            <div class="product-thumb">
-                <header class="product-header">
-                    <img src="{{asset('users/img/cup_on_red_800x600.jpg')}}" alt="Image Alternative text" title="Cup on red" />
-                </header>
-                <div class="product-inner">
-                    <h5 class="product-title">Fancy Coffe Cup</h5>
-                    <p class="product-desciption">Justo ornare ullamcorper volutpat fusce taciti augue justo</p>
-                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i> 8 days 41 h remaining</span>
-                        <ul class="product-price-list">
-                            <li><span class="product-price">$53</span>
+                        <ul class="product-actions-list">
+                            <li><button class="btn btn-sm to-cart" id="addCart<?php echo $countmax++?>"><i class="fa fa-shopping-cart"></i> To Cart</button>
                             </li>
-                            <li><span class="product-old-price">$143</span>
-                            </li>
-                            <li><span class="product-save">Save 37%</span>
+                            <li><a class="btn btn-sm" href="{{url('infoproduct/'.$dt->id)}}"><i class="fa fa-bars"></i> Details</a>
                             </li>
                         </ul>
                     </div>
-                    <p class="product-location"><i class="fa fa-map-marker"></i> Boston</p>
                 </div>
             </div>
-        </a>
-    </div> -->
+        </div>
+        @else
+        <div class="col-md-3">
+            <div class="product-thumb">
+                <header class="product-header" style="height: 200px">
+                    <img src="{{asset($dt->image)}}" alt="Image Alternative text" title="Green Furniture"style="height: 100%" />
+                </header>
+                <div class="product-inner">
+                    <ul class="icon-group icon-list-rating" title="3.7/5 rating">
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star-o"></i>
+                        </li>
+                    </ul>
+                    <h5 class="product-title">{{$dt->name}}</h5>
+                    <p class="product-desciption">{{$dt->origin}}</p>
+                    <div class="product-meta">
+                        <ul class="product-price-list">
+                            @if($dt->sale !='')
+                            <li>
+                                <span class="product-price" style="font-size: 10px;">
+                                    {{ number_format($dt->price - ($dt->price*($dt->sale->percent)/100)) }}VNĐ
+                                </span>
+                            </li>
+                            <li><span class="product-old-price" style="height: 30px; font-size: 10px;">{{ number_format($dt->price) }}VNĐ</span>
+                            </li>
+                            <li><span class="product-save" style="font-size: 10px;">Sale {{$dt->sale->percent}}%</span>
+                            </li>
+                            @else
+                            <li><span class="product-price">{{number_format($dt->price)}}VNĐ</span><!-- number_format(): dùng để format kiểu number -->
+                            </li>
+                            @endif
+                        </ul>
+                        <ul class="product-actions-list">
+                            <li><a class="btn btn-sm" href="{{url('login')}}"><i class="fa fa-shopping-cart"></i> To Cart</a>
+                            </li>
+                            <li><a class="btn btn-sm" href="{{url('infoproduct/'.$dt->id)}}"><i class="fa fa-bars"></i> Details</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+        <?php $countmax+1 ?>
+        @endforeach
+    </div>
     <div class="gap gap-small"></div>
     <h1 class="mb20">Dành riêng cho bạn<small><a href="#">View All</a></small></h1>
     <div class="row row-wrap">
+        <?php $count = 0 ?>
         @foreach($datax as $dtx)
-        <a class="col-md-4" href="#">
+        @if(Auth::check())
+        <input type="hidden" name="" id="p_id<?php echo $count; ?>" value="{{$dtx->id}}">
+        <input type="hidden" name="" id="u_id" value="{{Auth:user()->id}}">
+        <div class="col-md-3">
             <div class="product-thumb">
-                <header class="product-header">
-                    <img src="{{asset($dtx->image)}}" alt="Image Alternative text" title="Our Coffee miss u" />
+                <header class="product-header" style="height: 200px;">
+                    <img src="{{asset($dtx->image)}}" alt="Image Alternative text" title="Green Furniture" style="height: 100%" />
                 </header>
                 <div class="product-inner">
+                    <ul class="icon-group icon-list-rating" title="3.7/5 rating">
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star"></i>
+                        </li>
+                        <li><i class="fa fa-star-o"></i>
+                        </li>
+                    </ul>
                     <h5 class="product-title">{{$dtx->name}}</h5>
-                    <p class="product-desciption">{{$dtx->category->name}}</p>
-                    <div class="product-meta"><span class="product-time"><i class="fa fa-clock-o"></i>  6 h remaining</span>
+                    <p class="product-desciption">{{$dtx->origin}}</p>
+                    <div class="product-meta">
                         <ul class="product-price-list">
                             @if($dtx->sale !='')
                             <li>
-                                <span class="product-price">
-                                    {{ number_format($dtx->price - ($dtx->price*($dtx->sale->percent)/100)) }}vnđ
+                                <span class="product-price" style="font-size: 10px;">
+                                    {{ number_format($dtx->price - ($dtx->price*($dtx->sale->percent)/100)) }}VNĐ
                                 </span>
                             </li>
-                            <li><span class="product-old-price">{{ number_format($dtx->price) }}vnđ</span>
+                            <li><span class="product-old-price" style="height: 30px; font-size: 10px;">{{ number_format($dtx->price) }}VNĐ</span>
                             </li>
-                            <li><span class="product-save">Sale {{$dtx->sale->percent}}%</span>
+                            <li><span class="product-save" style="font-size: 10px;">Sale {{$dtx->sale->percent}}%</span>
                             </li>
                             @else
-                            <li><span class="product-price">{{number_format($dtx->price)}}</span><!-- number_format(): dùng để format kiểu number -->
+                            <li><span class="product-price">{{number_format($dtx->price)}}VNĐ</span><!-- number_format(): dùng để format kiểu number -->
                             </li>
                             @endif
                         </ul>
+                        <ul class="product-actions-list">
+                            <li><button class="btn btn-sm to-cart" id="addCart"><i class="fa fa-shopping-cart"></i> To Cart</button>
+                            </li>
+                            <li><a class="btn btn-sm" href="{{url('infoproduct/'.$dtx->id)}}"><i class="fa fa-bars"></i> Details</a>
+                            </li>
+                        </ul>
                     </div>
-                    <p class="product-location"><i class="fa fa-map-marker"></i>{{$dtx->origin}}</p>
                 </div>
             </div>
-        </a>
+        </div>
+        @else
+        <div class="col-md-3">
+                    <div class="product-thumb">
+                        <header class="product-header" style="height: 200px;">
+                            <img src="{{asset($dtx->image)}}" alt="Image Alternative text" title="Green Furniture" style="height: 100%" />
+                        </header>
+                        <div class="product-inner">
+                            <ul class="icon-group icon-list-rating" title="3.7/5 rating">
+                                <li><i class="fa fa-star"></i>
+                                </li>
+                                <li><i class="fa fa-star"></i>
+                                </li>
+                                <li><i class="fa fa-star"></i>
+                                </li>
+                                <li><i class="fa fa-star"></i>
+                                </li>
+                                <li><i class="fa fa-star-o"></i>
+                                </li>
+                            </ul>
+                            <h5 class="product-title">{{$dtx->name}}</h5>
+                            <p class="product-desciption">{{$dtx->origin}}</p>
+                            <div class="product-meta">
+                                <ul class="product-price-list">
+                                    @if($dtn->sale !='')
+                                    <li>
+                                        <span class="product-price" style="font-size: 10px;">
+                                            {{ number_format($dtx->price - ($dtx->price*($dtx->sale->percent)/100)) }}VNĐ
+                                        </span>
+                                    </li>
+                                    <li><span class="product-old-price" style="height: 30px; font-size: 10px;">{{ number_format($dtx->price) }}VNĐ</span>
+                                    </li>
+                                    <li><span class="product-save" style="font-size: 10px;">Sale {{$dtx->sale->percent}}%</span>
+                                    </li>
+                                    @else
+                                    <li><span class="product-price">{{number_format($dtx->price)}}VNĐ</span><!-- number_format(): dùng để format kiểu number -->
+                                    </li>
+                                    @endif
+                                </ul>
+                                <ul class="product-actions-list">
+                                    <li><a class="btn btn-sm" href="{{url('lgin')}}"><i class="fa fa-shopping-cart"></i> To Cart</a>
+                                    </li>
+                                    <li><a class="btn btn-sm" href="{{url('infoproduct/'.$dtx->id)}}"><i class="fa fa-bars"></i> Details</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        @endif
+        <?php $count+1 ?>
         @endforeach
     </div>
     <div class="gap"></div>
 </div>
+ <script src="{{asset('users/js/jquery.js')}}"></script>
+<script>
+    $(document).ready(function(){
+        <?php $countmax = count($data);
+        for($i =0;$i<$countmax;$i++){?>
+        $('button#addCart<?php echo $i?>').click(function(){
+            var pro_id<?php echo $i;?> = $('#pro_id<?php echo $i;?>').val();
+            var user_id = $('#user_id').val();
+            $.ajax({
+                type:'get',
+                url:'<?php echo url('shopping'); ?>' + pro_id<?php echo $i;?> + user_id,
+                success:function(){
+                    alert('Đã thêm vào đơn hàng');
+                }
+            });
+        });
+        <?php } ?>
+    });
+    $(document).ready(function(){
+         <?php $countP = count($datan);
+        for($i =0;$i<$countP;$i++){?>
+        $('button#AddCart<?php echo $i?>').click(function(){
+            var pr_id<?php echo $i;?> = $('#pr_id<?php echo $i;?>').val();
+            var userid = $('#userId').val();
+            $.ajax({
+                type:'get',
+                url:'<?php echo url('shopping'); ?>' + pr_id<?php echo $i;?> + userid,
+                success:function(){
+                    alert('Đã thêm vào đơn hàng');
+                }
+            });
+        });
+        <?php } ?>
+    });
+</script>
 @endsection

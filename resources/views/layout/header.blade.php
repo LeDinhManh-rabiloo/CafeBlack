@@ -1,7 +1,8 @@
 <!-- Start header -->
+@if(Auth::check() && Auth::user()->status == 1)
 <header class="main-header">
     <!-- Logo -->
-    <a href="../../index-2.html" class="logo">
+    <a href="{{url('Admin/Home')}}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>F</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -264,7 +265,7 @@
           </li>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
-            @if(Auth::check())
+            
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{asset(Auth::user()->image)}}" class="user-image rounded-circle" alt="User Image">
             </a>
@@ -304,7 +305,6 @@
                 </div>
               </li>
             </ul>
-           @endif
           </li>
         </ul>
       </div>
@@ -321,7 +321,6 @@
     <section class="sidebar">
       <!-- Sidebar user panel -->
       <div class="user-panel">
-        @if(Auth::check())
         <div class="image float-left">
           <img src="{{asset(Auth::user()->image)}}" class="rounded" alt="User Image">
         </div>
@@ -330,7 +329,6 @@
           <p>{{Auth::user()->name}}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
-        @endif
       <!-- search form -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
@@ -373,28 +371,18 @@
             <span>Danh sách đơn hàng</span>
           </a>
         </li>
-        <li>
-          <a href="pages/widgets/calendar.html">
-            <i class="fa fa-calendar"></i> <span>Calendar</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-red">3</small>
-              <small class="label pull-right bg-blue">17</small>
-            </span>
-          </a>
-        </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-pie-chart"></i>
-            <span>Charts</span>
+            <span>Thống kê</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-            <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-            <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+            <li><a href="{{url('Admin/Statistical/day')}}"><i class="fa fa-circle-o"></i>Đơn theo ngày</a></li>
+            <li><a href="{{url('Admin/Statistical/month')}}"><i class="fa fa-circle-o"></i>Đơn theo tháng</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>Đơn theo năm</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -546,4 +534,10 @@
     <a href="#" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="fa fa-power-off"></i></a>
   </div>
   </aside>
+  @else
+  <?php 
+    Auth::logout();
+    return redirect(url('Admin/login'));
+  ?>
+@endif
  <!--  End sidebar -->

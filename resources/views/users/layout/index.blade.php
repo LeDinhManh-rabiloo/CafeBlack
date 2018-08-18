@@ -209,9 +209,11 @@
         <!-- Custom scripts -->
         <script src="{{asset('users/js/custom.js')}}"></script>
         <script src="{{asset('users/js/switcher.js')}}"></script>
+       <!--  <script type="text/javascript" src="{{asset('users/js/myscript.js')}}"></script> -->
     </div>
 </body>
 
 
 <!-- Mirrored from remtsoy.com/tf_templates/couponia/demo_v3_3/index-coupon-layout-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 23 Jul 2018 10:25:59 GMT -->
 </html>
+

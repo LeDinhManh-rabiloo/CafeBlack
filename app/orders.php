@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class orders extends Model
 {
     protected $table = 'orders';
-    public function Customer()
+    public function users()
     {
-    	return $this->belongsTo('App\Customer','id_customer','id');
+    	return $this->belongsTo('App\Users','id_user','id');
     }
     public function product()
     {

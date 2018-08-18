@@ -32,7 +32,7 @@
 						<td>{{$stt}}</td>
 						<td>{{$key->name}}</td>
 						<td>
-							<img src="{{asset($key->image)}}" width="100%" height="70%">
+							<img src="{{asset($key->image)}}" width="100%" height="250px">
 						</td>
 						<td>{{$key->origin}}</td>
 						<td>{{$key->price}}</td>

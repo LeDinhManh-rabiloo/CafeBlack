@@ -17,19 +17,19 @@
           <div class="form-group">
             <h5>Mã đơn <span class="text-danger">*</span></h5>
             <div class="controls">
-              <input type="text" name="code_orders" placeholder="{{$key->code_orders}}" class="form-control" readonly> 
+              <input type="text" name="code_orders" placeholder="{{$key->code_order}}" class="form-control" readonly> 
             </div>
           </div>
           <div class="form-group">
             <h5>Người nhận <span class="text-danger">*</span></h5>
             <div class="controls">
-              <input type="text" name="customer" placeholder="{{$key->customer->name}}" class="form-control" readonly> 
+              <input type="text" name="customer" placeholder="{{$key->nguoinhan}}" class="form-control" readonly> 
             </div>
           </div>
           <div class="form-group">
             <h5>Địa chỉ nhận<span class="text-danger">*</span></h5>
             <div class="controls">
-              <input type="text" name="customer" placeholder="{{$key->customer->address}}" class="form-control" readonly> 
+              <input type="text" name="customer" placeholder="{{$key->Address}}" class="form-control" readonly> 
             </div>
           </div>
            <div class="form-group">
@@ -41,7 +41,7 @@
                 @if($key->id_status == $key2->id)
                 {{"selected"}}
                 @endif
-                value="{{$key2->id}}">{{$key2->name}}</option>
+                value="{{$key2->id}}">{{$key2->status}}</option>
                 }
                 }
                 @endforeach

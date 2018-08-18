@@ -1,3 +1,4 @@
+@if(Auth::check() && Auth::user()->status == 1)
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,7 +36,7 @@
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
-
+  <script type="text/javascript" src="{{asset('ckeditor/ckeditor.js')}}"></script>
 	<!-- google font -->
 	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 	
@@ -293,3 +294,9 @@
 
 <!-- Mirrored from fox-admin-templates.multipurposethemes.com/fox-admin-template/pages/layout/fixed.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 10 Jul 2018 04:37:33 GMT -->
 </html>
+@else
+  <?php 
+    Auth::logout();
+    return redirect(url('Admin/login'));
+  ?>
+@endif
